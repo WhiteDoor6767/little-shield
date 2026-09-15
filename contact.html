@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — Little Shield</title>
+  <meta name="description" content="Contact Little Shield — report a concern, volunteer, or partner with us. We are here to protect children and build safer communities." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+    .contact-form-wrap { background:var(--white); border-radius:var(--radius-xl); padding:40px; box-shadow:var(--shadow-md); }
+    .form-group { margin-bottom:22px; }
+    .form-group label { display:block; font-size:.88rem; font-weight:600; color:var(--navy); margin-bottom:8px; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width:100%;
+      padding:13px 16px;
+      border:2px solid var(--cream-dark);
+      border-radius:var(--radius-md);
+      font-family:var(--font-body);
+      font-size:.9rem;
+      color:var(--text-main);
+      background:var(--cream);
+      transition:border-color var(--transition);
+      outline:none;
+      appearance:none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color:var(--orange); background:var(--white); }
+    .form-group textarea { height:140px; resize:vertical; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .contact-info { display:flex; flex-direction:column; gap:20px; }
+    .contact-info-card { background:var(--white); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow-sm); display:flex; gap:16px; align-items:flex-start; border:1px solid rgba(232,114,74,.08); transition:var(--transition); }
+    .contact-info-card:hover { box-shadow:var(--shadow-md); transform:translateX(4px); }
+    .ci-icon { width:48px; height:48px; border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0; }
+    .ci-body h4 { font-size:.95rem; margin-bottom:4px; }
+    .ci-body p,.ci-body a { font-size:.88rem; color:var(--text-muted); }
+    .ci-body a:hover { color:var(--orange); }
+    .form-success { display:none; text-align:center; padding:32px; }
+    .form-success.show { display:block; }
+    .form-success .s-icon { font-size:3.5rem; margin-bottom:16px; }
+    @media(max-width:768px){ .contact-grid{grid-template-columns:1fr;} .form-row{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Little Shield Home"><div class="nav-logo-icon">🛡️</div><div class="nav-logo-text"><span class="brand">Little Shield</span><span class="tagline">Safe Spaces for Every Child</span></div></a>
+      <ul class="nav-links" role="list"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="goals.html">Our Goals</a></li><li><a href="programs.html">Programs</a></li><li><a href="education.html">Education</a></li><li><a href="contact.html">Contact</a></li></ul>
+      <a href="contact.html" class="btn btn-primary nav-cta">Get Involved</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="goals.html">Our Goals</a><a href="programs.html">Programs</a><a href="education.html">Education</a><a href="contact.html">Contact</a><a href="contact.html" class="btn btn-primary" style="margin-top:12px">Get Involved</a></div>
+
+  <main>
+    <div class="page-hero page-top">
+      <div class="container">
+        <div class="page-hero-label">Reach Out</div>
+        <h1>Contact &amp; Get Involved</h1>
+        <p>Report a concern, volunteer with us, or find out how you can support our mission. Every message matters.</p>
+      </div>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div style="background:rgba(232,114,74,.1);border-bottom:2px solid rgba(232,114,74,.2);padding:16px 0;">
+      <div class="container" style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;text-align:center;">
+        <span style="font-size:1.2rem;">🆘</span>
+        <strong style="color:var(--navy);">Is a child in immediate danger?</strong>
+        <span style="color:var(--text-muted);">Call <strong style="color:var(--orange);font-size:1.1rem;">Childline 1098</strong> (Free · 24×7) or <strong style="color:var(--orange);">Police 100</strong> immediately.</span>
+      </div>
+    </div>
+
+    <section style="background:var(--cream);" aria-labelledby="contactHeading">
+      <div class="container">
+        <div class="contact-grid">
+
+          <!-- Form -->
+          <div class="contact-form-wrap reveal">
+            <h2 id="contactHeading" style="font-size:1.5rem;margin-bottom:6px;">Send Us a Message</h2>
+            <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:28px;">We respond to all messages within 48 hours.</p>
+
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name *</label>
+                  <input type="text" id="firstName" name="firstName" required placeholder="Your first name" autocomplete="given-name" />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" placeholder="Your last name" autocomplete="family-name" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com" autocomplete="email" />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" autocomplete="tel" />
+              </div>
+
+              <div class="form-group">
+                <label for="reason">Reason for Contact *</label>
+                <select id="reason" name="reason" required>
+                  <option value="" disabled selected>Select a reason…</option>
+                  <option value="volunteer">I want to volunteer</option>
+                  <option value="concern">Report a concern about a child</option>
+                  <option value="partner">Partnership / Collaboration</option>
+                  <option value="education">Education program inquiry</option>
+                  <option value="media">Media / Press inquiry</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Your Message *</label>
+                <textarea id="message" name="message" required placeholder="Tell us more about how you'd like to connect or what you need help with…"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="submitBtn">
+                Send Message ✉️
+              </button>
+            </form>
+
+            <div class="form-success" id="formSuccess" role="alert" aria-live="polite">
+              <div class="s-icon">✅</div>
+              <h3 style="margin-bottom:8px;">Message Received!</h3>
+              <p style="color:var(--text-muted);">Thank you for reaching out. We'll get back to you within 48 hours. Together, we can protect every child.</p>
+              <button class="btn btn-outline" style="margin-top:20px;" onclick="resetForm()">Send Another Message</button>
+            </div>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="contact-info reveal reveal-delay-2">
+
+            <div class="contact-info-card">
+              <div class="ci-icon" style="background:rgba(232,114,74,.12);">📞</div>
+              <div class="ci-body">
+                <h4>Emergency Helpline</h4>
+                <p>Childline India (24×7, Free)</p>
+                <a href="tel:1098" style="font-size:1.2rem;font-weight:800;color:var(--orange);">1098</a>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="ci-icon" style="background:rgba(58,191,184,.12);">📧</div>
+              <div class="ci-body">
+                <h4>Email Us</h4>
+                <p>For general inquiries and volunteering</p>
+                <a href="mailto:hello@littleshield.org">hello@littleshield.org</a>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="ci-icon" style="background:rgba(26,43,74,.08);">📍</div>
+              <div class="ci-body">
+                <h4>Our Base</h4>
+                <p>Community Centre, Sector 14<br/>Urban Slum District, City — 000001</p>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="ci-icon" style="background:rgba(232,114,74,.12);">⏰</div>
+              <div class="ci-body">
+                <h4>Working Hours</h4>
+                <p>Monday – Saturday<br/>9:00 AM – 6:00 PM</p>
+              </div>
+            </div>
+
+            <!-- Volunteer CTA -->
+            <div style="background:var(--navy);border-radius:var(--radius-lg);padding:28px;text-align:center;">
+              <div style="font-size:2rem;margin-bottom:12px;">🤝</div>
+              <h3 style="color:var(--white);margin-bottom:8px;">Become a Volunteer</h3>
+              <p style="color:rgba(255,255,255,.65);font-size:.88rem;margin-bottom:18px;">Join 50+ volunteers across our communities. No special skills needed — just a willingness to care.</p>
+              <a href="#reason" onclick="document.getElementById('reason').value='volunteer';document.getElementById('reason').focus();" class="btn btn-primary" style="width:100%;justify-content:center;">Apply to Volunteer</a>
+            </div>
+
+            <!-- Helplines quick reference -->
+            <div style="background:var(--white);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-sm);">
+              <h4 style="margin-bottom:14px;font-size:.95rem;">📞 All Helplines</h4>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;justify-content:space-between;font-size:.88rem;padding:8px;background:var(--cream);border-radius:var(--radius-sm);"><span>Childline India</span><strong style="color:var(--orange);">1098</strong></div>
+                <div style="display:flex;justify-content:space-between;font-size:.88rem;padding:8px;background:var(--cream);border-radius:var(--radius-sm);"><span>Police Emergency</span><strong style="color:var(--orange);">100</strong></div>
+                <div style="display:flex;justify-content:space-between;font-size:.88rem;padding:8px;background:var(--cream);border-radius:var(--radius-sm);"><span>Women &amp; Child Helpline</span><strong style="color:var(--orange);">181</strong></div>
+                <div style="display:flex;justify-content:space-between;font-size:.88rem;padding:8px;background:var(--cream);border-radius:var(--radius-sm);"><span>Missing Children</span><strong style="color:var(--orange);">1094</strong></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="nav-logo"><div class="nav-logo-icon">🛡️</div><div class="nav-logo-text"><span class="brand" style="color:var(--white)">Little Shield</span><span class="tagline">Safe Spaces for Every Child</span></div></div><p>A community-driven NGO protecting children in urban slum settlements from abuse, neglect, and exploitation.</p></div>
+        <nav class="footer-col" aria-label="Site links"><h4>Navigate</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="goals.html">Our Goals</a><a href="programs.html">Programs</a><a href="education.html">Education</a><a href="contact.html">Contact</a></nav>
+        <nav class="footer-col" aria-label="Education links"><h4>Education</h4><a href="education.html">Child Rights</a><a href="education.html">Safety Tips</a><a href="education.html">Protection Laws</a><a href="education.html">Helplines</a></nav>
+        <nav class="footer-col" aria-label="Resources links"><h4>Resources</h4><a href="programs.html">All Programs</a><a href="goals.html">2026 Goals</a><a href="contact.html">Report a Concern</a></nav>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Little Shield NGO. Guarding Childhoods · Building Futures.</span><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      setTimeout(() => {
+        form.style.display = 'none';
+        success.classList.add('show');
+      }, 1200);
+    });
+
+    function resetForm() {
+      form.reset();
+      form.style.display = 'block';
+      success.classList.remove('show');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Send Message ✉️';
+    }
+  </script>
+</body>
+</html>

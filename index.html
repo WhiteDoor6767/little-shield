@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Shield — Safe Spaces for Every Child</title>
+  <meta name="description" content="Little Shield is a community-driven NGO protecting children in urban slum settlements from abuse, neglect, and exploitation, building safe spaces where they can learn and thrive." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── HOME-specific styles ─────────────────── */
+
+    /* Hero */
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(58,191,184,.12);
+      border: 1px solid rgba(58,191,184,.3);
+      border-radius: 99px;
+      padding: 6px 16px 6px 8px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--teal-dark);
+      margin-bottom: 20px;
+    }
+
+    .hero-badge .dot {
+      width: 8px; height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(58,191,184,.5); }
+      50%      { box-shadow: 0 0 0 6px rgba(58,191,184,0); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+
+    .hero-title .accent { color: var(--orange); }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 36px;
+      max-width: 580px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+
+    /* Inline stats row */
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      border: 1px solid rgba(232,114,74,.1);
+    }
+
+    .hero-stat {
+      padding: 28px 44px;
+      text-align: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .hero-stat + .hero-stat::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(232,114,74,.15);
+    }
+
+    .hero-stat .n {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .hero-stat .l {
+      font-size: .85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* keep shield-icon for other uses */
+    .shield-icon {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg in oklab, var(--orange), var(--orange-dark));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 8px 24px rgba(232,114,74,.35);
+    }
+
+    .hero-card-title { font-size: 1.3rem; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .hero-card-sub   { font-size: .85rem; color: var(--text-muted); }
+
+    .hero-mini-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .mini-stat {
+      background: var(--cream);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+    }
+    .mini-stat .n { font-size: 1.5rem; font-weight: 800; color: var(--orange); }
+    .mini-stat .l { font-size: .72rem; color: var(--text-muted); }
+
+    .hero-floating-card {
+      position: absolute;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .85rem;
+      z-index: 3;
+    }
+
+    .hero-floating-card.card-teal {
+      bottom: -20px; left: -28px;
+      border-left: 4px solid var(--teal);
+    }
+    .hero-floating-card.card-orange {
+      top: -20px; right: -28px;
+      border-left: 4px solid var(--orange);
+    }
+
+    .hfc-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .hfc-icon.teal { background: rgba(58,191,184,.12); }
+    .hfc-icon.orange { background: rgba(232,114,74,.12); }
+
+    .hfc-text .t { font-weight: 700; color: var(--navy); }
+    .hfc-text .s { color: var(--text-muted); font-size: .78rem; }
+
+    /* Goal Section */
+    .goal-section {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .goal-section::before {
+      content: '2026';
+      position: absolute;
+      right: -40px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 16rem;
+      font-weight: 900;
+      color: rgba(255,255,255,.03);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .goal-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .goal-text .section-label { color: var(--teal-light); }
+    .goal-text .section-label::before,
+    .goal-text .section-label::after { background: var(--teal-light); }
+    .goal-text h2 { color: var(--white); }
+    .goal-text p  { color: rgba(255,255,255,.65); font-size: 1.05rem; margin-top: 12px; line-height: 1.8; }
+
+    .goal-highlight {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .goal-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .goal-pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: rgba(255,255,255,.05);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+      transition: var(--transition);
+    }
+
+    .goal-pillar:hover {
+      background: rgba(255,255,255,.08);
+      transform: translateX(4px);
+    }
+
+    .pillar-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .pillar-icon.orange { background: rgba(232,114,74,.2); }
+    .pillar-icon.teal   { background: rgba(58,191,184,.2); }
+    .pillar-icon.rose   { background: rgba(245,198,192,.15); }
+
+    .pillar-text h4 { color: var(--white); font-size: .95rem; margin-bottom: 4px; }
+    .pillar-text p  { color: rgba(255,255,255,.55); font-size: .85rem; }
+
+    /* Sections bg alternates */
+    .bg-white-section { background: var(--white); }
+    .bg-cream-section  { background: var(--cream); }
+
+    /* Programs */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .program-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid rgba(232,114,74,.08);
+    }
+
+    .program-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .program-card-top {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .program-card-body {
+      background: var(--white);
+      padding: 24px;
+    }
+
+    .program-card-body h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+    .program-card-body p { font-size: .88rem; color: var(--text-muted); }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: linear-gradient(135deg in oklab, var(--orange) 0%, var(--orange-dark) 100%);
+      border-radius: var(--radius-xl);
+      padding: 60px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+
+    .cta-banner::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 5%;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+
+    .cta-banner h2 { color: var(--white); font-size: 2rem; margin-bottom: 12px; }
+    .cta-banner p  { color: rgba(255,255,255,.8); margin-bottom: 28px; font-size: 1.05rem; }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--orange-dark);
+      font-weight: 700;
+    }
+    .btn-white:hover { background: var(--cream); transform: translateY(-2px); }
+
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { display: none; }
+      .goal-inner { grid-template-columns: 1fr; gap: 40px; }
+      .programs-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .programs-grid { grid-template-columns: 1fr; }
+      .cta-banner { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ──────────────────────────────────────────── -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Little Shield Home">
+        <div class="nav-logo-icon">🛡️</div>
+        <div class="nav-logo-text">
+          <span class="brand">Little Shield</span>
+          <span class="tagline">Safe Spaces for Every Child</span>
+        </div>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="goals.html">Our Goals</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <a href="contact.html" class="btn btn-primary nav-cta">Get Involved</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Mobile Menu ─────────────────────────────────────── -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="goals.html">Our Goals</a>
+    <a href="programs.html">Programs</a>
+    <a href="education.html">Education</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-primary" style="margin-top:12px">Get Involved</a>
+  </div>
+
+  <main>
+    <!-- ── Hero ── -->
+    <section style="background:var(--cream);padding-top:var(--nav-height);" aria-label="Hero section">
+      <div class="container">
+        <div class="hero-content">
+
+          <div class="hero-badge">
+            <span class="dot" aria-hidden="true"></span>
+            Guarding Childhoods · Building Futures
+          </div>
+
+          <h1 class="hero-title" style="color:var(--navy);">
+            Safe Spaces for <span class="accent">Every Child</span>
+          </h1>
+
+          <p class="hero-desc" style="color:#555;">
+            A community-driven NGO protecting children in urban slum settlements from abuse,
+            neglect, and exploitation — building spaces where they can learn and thrive.
+          </p>
+
+          <div class="hero-actions">
+            <a href="education.html" class="btn btn-primary" id="heroLearnBtn">Learn &amp; Educate →</a>
+            <a href="about.html"     class="btn btn-outline"  id="heroAboutBtn">Our Story</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ── Goal 2026 ────────────────────────────────────── -->
+    <section class="goal-section" aria-labelledby="goalHeading">
+      <div class="container">
+        <div class="goal-inner">
+          <div class="goal-text reveal">
+            <div class="section-label">Our Current Goal</div>
+            <h2 id="goalHeading">
+              Mission <span class="goal-highlight">2026</span>
+            </h2>
+            <p>
+              To spread awareness about child rights and safety in slum communities,
+              and ensure every child has access to quality education by 2026.
+            </p>
+
+            <div class="goal-pillars">
+              <div class="goal-pillar">
+                <div class="pillar-icon orange">👁️</div>
+                <div class="pillar-text">
+                  <h4>Awareness &amp; Advocacy</h4>
+                  <p>Campaigns and workshops that educate families and communities about child rights and protection laws.</p>
+                </div>
+              </div>
+              <div class="goal-pillar">
+                <div class="pillar-icon teal">🚔</div>
+                <div class="pillar-text">
+                  <h4>Police Partnership</h4>
+                  <p>Close coordination with local police for quick, child-friendly response to safety concerns.</p>
+                </div>
+              </div>
+              <div class="goal-pillar">
+                <div class="pillar-icon rose">📚</div>
+                <div class="pillar-text">
+                  <h4>Education &amp; Learning</h4>
+                  <p>Access to schooling, tutoring, and life-skills training so every child can learn and grow.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal reveal-delay-2" style="text-align:center;">
+            <div style="background:rgba(255,255,255,.06);border-radius:var(--radius-xl);padding:40px;border:1px solid rgba(255,255,255,.1);">
+              <div style="font-size:5rem;margin-bottom:16px;">🛡️</div>
+              <h3 style="color:var(--white);font-size:1.5rem;margin-bottom:12px;">Guarding Childhoods</h3>
+              <p style="color:rgba(255,255,255,.6);margin-bottom:28px;">Building futures one safe space at a time.</p>
+              <a href="goals.html" class="btn btn-primary">See Full Goals →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Programs Preview ──────────────────────────────── -->
+    <section class="bg-white-section" aria-labelledby="programsHeading">
+      <div class="container">
+        <div class="reveal" style="text-align:center;margin-bottom:8px;">
+          <div class="section-label" style="justify-content:center;">What We Do</div>
+          <h2 id="programsHeading" class="section-title">Our Programs</h2>
+          <p class="section-sub" style="margin-inline:auto;text-align:center;">
+            Five key focus areas that together build a protective environment for every child.
+          </p>
+        </div>
+
+        <div class="programs-grid">
+          <div class="program-card reveal reveal-delay-1">
+            <div class="program-card-top" style="background:linear-gradient(135deg in oklab,rgba(232,114,74,.15),rgba(232,114,74,.05));">👁️</div>
+            <div class="program-card-body">
+              <span class="tag tag-orange">Awareness</span>
+              <h3>Community Awareness</h3>
+              <p>Media outreach and community campaigns on child rights and safety in slum settlements.</p>
+            </div>
+          </div>
+
+          <div class="program-card reveal reveal-delay-2">
+            <div class="program-card-top" style="background:linear-gradient(135deg in oklab,rgba(58,191,184,.15),rgba(58,191,184,.05));">🚔</div>
+            <div class="program-card-body">
+              <span class="tag tag-teal">Safety</span>
+              <h3>Police Partnership</h3>
+              <p>Work with local police units for quick, child-friendly response to safety cases.</p>
+            </div>
+          </div>
+
+          <div class="program-card reveal reveal-delay-3">
+            <div class="program-card-top" style="background:linear-gradient(135deg in oklab,rgba(26,43,74,.1),rgba(26,43,74,.04));">🎓</div>
+            <div class="program-card-body">
+              <span class="tag tag-navy">Education</span>
+              <h3>Education Access</h3>
+              <p>Schooling, tutoring, and life-skills training for children in underserved communities.</p>
+            </div>
+          </div>
+
+          <div class="program-card reveal reveal-delay-1">
+            <div class="program-card-top" style="background:linear-gradient(135deg in oklab,rgba(232,114,74,.1),rgba(58,191,184,.08));">👪</div>
+            <div class="program-card-body">
+              <span class="tag tag-orange">Community</span>
+              <h3>Parent &amp; Community Sensitization</h3>
+              <p>Workshops and street plays engaging parents and community elders.</p>
+            </div>
+          </div>
+
+          <div class="program-card reveal reveal-delay-2">
+            <div class="program-card-top" style="background:linear-gradient(135deg in oklab,rgba(58,191,184,.1),rgba(232,114,74,.08));">🚪</div>
+            <div class="program-card-body">
+              <span class="tag tag-teal">Outreach</span>
+              <h3>Door-to-Door Drives</h3>
+              <p>Home visits to inform families about child rights, safety, and protection laws.</p>
+            </div>
+          </div>
+
+          <div class="program-card reveal reveal-delay-3" style="background:var(--navy);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:32px;">
+            <div style="font-size:2.5rem;margin-bottom:16px;">💬</div>
+            <h3 style="color:var(--white);margin-bottom:10px;">Want to Volunteer?</h3>
+            <p style="color:rgba(255,255,255,.65);font-size:.88rem;margin-bottom:20px;">Join our community of changemakers.</p>
+            <a href="contact.html" class="btn btn-primary">Get Involved</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Banner ────────────────────────────────────── -->
+    <section class="bg-cream-section" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-banner reveal">
+          <div style="font-size:2.5rem;margin-bottom:16px;">📚</div>
+          <h2>Learn About Child Rights</h2>
+          <p>Explore our education hub — awareness is the first step to change.</p>
+          <a href="education.html" class="btn btn-white btn-lg" id="ctaEducateBtn">Explore Education →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="nav-logo-icon">🛡️</div>
+            <div class="nav-logo-text">
+              <span class="brand" style="color:var(--white)">Little Shield</span>
+              <span class="tagline">Safe Spaces for Every Child</span>
+            </div>
+          </div>
+          <p>A community-driven NGO protecting children in urban slum settlements from abuse, neglect, and exploitation.</p>
+        </div>
+
+        <nav class="footer-col" aria-label="Site links">
+          <h4>Navigate</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="goals.html">Our Goals</a>
+          <a href="programs.html">Programs</a>
+          <a href="education.html">Education</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <nav class="footer-col" aria-label="Programs links">
+          <h4>Programs</h4>
+          <a href="programs.html#awareness">Community Awareness</a>
+          <a href="programs.html#police">Police Partnership</a>
+          <a href="programs.html#education">Education Access</a>
+          <a href="programs.html#parents">Parent Sensitization</a>
+          <a href="programs.html#outreach">Door-to-Door Drives</a>
+        </nav>
+
+        <nav class="footer-col" aria-label="Resources links">
+          <h4>Resources</h4>
+          <a href="education.html#rights">Child Rights</a>
+          <a href="education.html#safety">Safety Tips</a>
+          <a href="education.html#laws">Protection Laws</a>
+          <a href="education.html#helplines">Helplines</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Little Shield NGO. Guarding Childhoods · Building Futures.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
